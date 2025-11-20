@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Registrar usuario trabajador</h3>
+<form method="post">
+    <div class="mb-3">
+        <label>Nombre completo</label>
+        <input type="text" name="nombre" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Usuario de acceso</label>
+        <input type="text" name="username" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Contraseña inicial</label>
+        <input type="password" name="password" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Rol</label>
+        <select name="rol" class="form-select">
+            <option value="trabajador">Trabajador</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Registrar trabajador</button>
+</form>
+{% endblock %}

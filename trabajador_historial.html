@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Historial de mis informes</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Evento</th>
+            <th>Lugar</th>
+            <th>Fecha</th>
+            <th>Pagado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for informe in informes %}
+        <tr>
+            <td>{{ informe.id }}</td>
+            <td>{{ informe.nombre_evento }}</td>
+            <td>{{ informe.lugar }}</td>
+            <td>{{ informe.fecha }}</td>
+            <td>
+                {% if informe.pagado %}
+                    <span class="badge bg-success">Pagado</span>
+                {% else %}
+                    <span class="badge bg-warning">Pendiente</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ url_for('descargar_word', informe_id=informe.id) }}" class="btn btn-sm btn-info">Descargar Word</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6">Sin informes registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('index') }}" class="btn btn-secondary">Volver</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Cambiar contraseña para {{ usuario.nombre }}</h3>
+<form method="post">
+    <div class="mb-3">
+        <label>Nueva contraseña</label>
+        <input type="password" name="nueva" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Repetir nueva contraseña</label>
+        <input type="password" name="repetir" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Cambiar</button>
+    <a href="{{ url_for('admin_panel') }}" class="btn btn-secondary mt-3">Volver</a>
+</form>
+{% endblock %}

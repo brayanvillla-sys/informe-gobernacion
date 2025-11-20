@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Panel del administrador</h3>
+<a href="{{ url_for('register_user') }}" class="btn btn-success mb-3">Registrar nuevo trabajador</a>
+<h4>Informes Generados</h4>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Evento</th>
+            <th>Trabajador</th>
+            <th>Lugar</th>
+            <th>Fecha</th>
+            <th>Pagado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for informe in informes %}
+        <tr>
+            <td>{{ informe.id }}</td>
+            <td>{{ informe.nombre_evento }}</td>
+            <td>{{ informe.autor.nombre }}</td>
+            <td>{{ informe.lugar }}</td>
+            <td>{{ informe.fecha }}</td>
+            <td>
+                {% if informe.pagado %}
+                    <span class="badge bg-success">Pagado</span>
+                {% else %}
+                    <span class="badge bg-warning">Pendiente</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ url_for('descargar_word', informe_id=informe.id) }}" class="btn btn-sm btn-info">Descargar Word</a>
+                {% if not informe.pagado %}
+                    <a href="{{ url_for('marcar_pagado', informe_id=informe.id) }}" class="btn btn-sm btn-success">Marcar como pagado</a>
+                {% endif %}
+                <a href="{{ url_for('eliminar_informe', informe_id=informe.id) }}" class="btn btn-sm btn-danger"
+                   onclick="return confirm('¿Seguro que desea eliminar este informe?');">Eliminar</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7">Sin informes.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h4>Trabajadores registrados</h4>
+<ul>
+    {% for usuario in usuarios %}
+    <li>
+        {{ usuario.nombre }} ({{ usuario.username }})
+        <a href="{{ url_for('cambiar_contrasena_admin', user_id=usuario.id) }}" class="btn btn-sm btn-warning ms-2">Cambiar contraseña</a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('logout') }}" class="btn btn-dark mt-3">Salir</a>
+{% endblock %}

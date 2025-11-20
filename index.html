@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Generar informe de evento</h3>
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label>Nombre del evento</label>
+        <input type="text" name="nombre_evento" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Teléfono</label>
+        <input type="text" name="telefono" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Lugar</label>
+        <input type="text" name="lugar" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Fecha</label>
+        <input type="date" name="fecha" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Fotos del evento</label>
+        <input type="file" name="fotos" accept="image/*" class="form-control" multiple required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar informe</button>
+</form>
+<a href="{{ url_for('trabajador_historial') }}" class="btn btn-secondary mt-3">Ver mis informes</a>
+{% endblock %}
